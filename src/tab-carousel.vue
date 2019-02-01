@@ -1,0 +1,96 @@
+<template>
+  <div
+    class="tab-box"
+    :class="{'with-animation': !paging}"
+    :style="{'transform': 'translateX(' + transformX + 'px)'}">
+    <div
+      ref="tab"
+      class="tab"
+      v-for="item in items"
+      v-bind:key="item.id">
+      {{item.name}}
+    </div>  
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  props: ['items', 'page', 'transformXPercent'],
+  data: function() {
+    return {
+      items: this.items,
+      page: this.page,
+      paging: false,
+      itemsWidth: [],
+      browserWidth: window.innerWidth,
+      transformX: 0
+    }
+  },
+  watch: {
+    page : function () {
+      console.log('tab-paging');
+      this.paging = false;
+      this.updateTransformX();
+    },
+    transformXPercent: function () {
+      if (this.transformXPercent === null){
+        // paging中にnullが来た場合はキャンセル処理
+        if (this.paging) {
+          this.paging = false;
+          this.updateTransformX();
+        }
+        return;
+      }
+      this.paging = true;
+      this.updateTransformX();
+    }
+  },
+  methods: {
+    updateTransformX: function () {
+      var transformX = 0;
+      const percent = 0.5 + this.transformXPercent;
+
+      for (var i = 0; i < this.itemsWidth.length; i++) {
+        if (i === this.page) {
+          transformX += this.itemsWidth[i] * percent;
+          break;
+        }
+        transformX += this.itemsWidth[i];
+      }
+      this.transformX = (this.browserWidth / 2) - transformX;
+    }
+  },
+  updated: function () {
+    this.$nextTick(() =>{
+      if (this.itemsWidth.length != this.items.length) this.itemsWidth = new Array(this.items.length);
+      this.$refs.tab.forEach((element, index) => {
+        this.itemsWidth[index] = element.clientWidth;
+      });
+      this.updateTransformX(this.page);
+    });
+  }
+});
+</script>
+
+
+<style scoped>
+  .tab-box {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .with-animation {
+    transition: 300ms transform ease-in-out 0ms;
+  }
+
+  .tab {
+    padding: 0 16px;
+    color: #999;
+    flex-shrink: 0;
+  }
+</style>
+
