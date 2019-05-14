@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack && webpack-dev-server --hot --inline --watch-content-base --content-base public/ --open-page index.html ",
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack-dev-server --config webpack.config.js --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
