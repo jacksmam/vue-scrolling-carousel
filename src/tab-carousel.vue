@@ -19,8 +19,6 @@ export default Vue.extend({
   props: ['items', 'page', 'transformXPercent'],
   data: function() {
     return {
-      items: this.items,
-      page: this.page,
       paging: false,
       itemsWidth: [],
       browserWidth: window.innerWidth,
@@ -29,7 +27,6 @@ export default Vue.extend({
   },
   watch: {
     page : function () {
-      console.log('tab-paging');
       this.paging = false;
       this.updateTransformX();
     },
@@ -59,16 +56,21 @@ export default Vue.extend({
         transformX += this.itemsWidth[i];
       }
       this.transformX = (this.browserWidth / 2) - transformX;
-    }
-  },
-  updated: function () {
-    this.$nextTick(() =>{
+    },
+    $_tabCrousel_nextTick: function () {
+      // if (this.itemsWidth.length === this.items.length) return;
       if (this.itemsWidth.length != this.items.length) this.itemsWidth = new Array(this.items.length);
       this.$refs.tab.forEach((element, index) => {
         this.itemsWidth[index] = element.clientWidth;
       });
-      this.updateTransformX(this.page);
-    });
+      this.updateTransformX();
+    }
+  },
+  updated: function () {
+    this.$nextTick(this.$_tabCrousel_nextTick);
+  },
+  mounted: function () {
+    this.$nextTick(this.$_tabCrousel_nextTick);
   }
 });
 </script>
