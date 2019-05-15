@@ -46,19 +46,23 @@ export default Vue.extend({
   methods: {
     updateTransformX: function () {
       var transformX = 0;
+      // 中央値からどれだけ左右に移動したかのpercent
       const percent = 0.5 + this.transformXPercent;
 
+      // pageまでのタブのサイズをすべて足し合わせる
       for (var i = 0; i < this.itemsWidth.length; i++) {
         if (i === this.page) {
+          // 対象タブに移動percentをかけている
           transformX += this.itemsWidth[i] * percent;
           break;
         }
         transformX += this.itemsWidth[i];
       }
+
       this.transformX = (this.browserWidth / 2) - transformX;
     },
     $_tabCrousel_nextTick: function () {
-      // if (this.itemsWidth.length === this.items.length) return;
+      if (this.itemsWidth.length === this.items.length) return;
       if (this.itemsWidth.length != this.items.length) this.itemsWidth = new Array(this.items.length);
       this.$refs.tab.forEach((element, index) => {
         this.itemsWidth[index] = element.clientWidth;
