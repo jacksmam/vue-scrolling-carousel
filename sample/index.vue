@@ -22,9 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-
-import Carousel from '../src/carousel.vue'
-import TabCarousel from '../src/tab-carousel.vue'
+import {Carousel, TabCarousel} from '../src/index';
 
 export default Vue.extend({
   data: () => {
