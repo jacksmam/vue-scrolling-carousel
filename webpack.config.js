@@ -2,12 +2,15 @@ const path = require('path')
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
+// 複数エントリーポイント: http://okamuuu.hatenablog.com/entry/2016/11/24/135416
 module.exports = {
-  entry: './sample/main.ts',
+  entry: {
+    "dist/vue-scrolling-tab": "./src/index.ts",
+    "sample/output/sample": './sample/main.ts'
+  },
   output: {
-    path: path.resolve(__dirname, './public'),
-    publicPath: '/',
-    filename: 'main.js'
+    path: path.resolve(__dirname),
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -35,12 +38,15 @@ module.exports = {
     }
   },
   devServer: {
-    contentBase: 'public',
+    contentBase: path.join(__dirname, 'sample', 'output'),
+    watchContentBase: true,
+    publicPath: '',
     port: 3000,
     inline: true,
     hot: true
   },
   performance: {
     hints: false
-  }
+  },
+  watch: true
 }
