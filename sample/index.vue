@@ -14,7 +14,7 @@
         class="content"
         v-bind:style="{backgroundColor: item.color}"
         v-for="(item, index) in items" v-bind:key="index">
-        {{item.name}}
+        <div class="text">{{item.content}}</div>
       </div>
     </carousel>
   </div>
@@ -29,21 +29,26 @@ export default Vue.extend({
     return {
       items: [{
         name: 'テスト1',
-        color: '#DA5019'
+        color: '#DA5019',
+        content: 'テスト1テスト1'
       }, {
         name: 'テスト2',
-        color: '#009250'
+        color: '#009250',
+        content: 'テスト2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nテスト2'
       }, {
         name: 'テスト3',
-        color: '#007AB7'
+        color: '#007AB7',
+        content: 'test'
       }, {
         name: 'テスト4',
-        color: '#F6CA06'
+        color: '#F6CA06',
+        content: 'test'
       }, {
         name: 'テスト5',
-        color: '#0086AB'
+        color: '#0086AB',
+        content: 'test'
       }],
-      carouselPage: 0
+      carouselPage: 3
     };
   },
   components: {
@@ -60,7 +65,7 @@ export default Vue.extend({
     }
   },
   mounted () {
-    this.carouselPage = 2;
+    this.carouselPage = 3;
   }
 });
 </script>
@@ -87,9 +92,12 @@ export default Vue.extend({
     overflow-x: hidden;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+  }
+
+  .text {
+    flex: 1;
+    white-space: pre-wrap;
   }
 </style>
 
