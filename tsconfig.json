@@ -6,6 +6,6 @@
     "moduleResolution": "node",
     "lib": ["dom", "es5", "es2015.promise"]
   },
-  "include": ["src/**/*.vue", "sample/**/*.vue", "sample/**/*.ts", "src/index.ts"],
+  "include": ["vue.d.ts", "src/**/*"],
   "exclude": ["node_modules"]
 }

@@ -2,7 +2,7 @@
   "name": "vue-scrolling-tab",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/vue-scrolling-carousel.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server --config webpack.config.js --mode development",

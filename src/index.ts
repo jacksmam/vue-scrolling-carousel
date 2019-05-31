@@ -1,7 +1,7 @@
 import Carousel from './carousel.vue';
 import TabCarousel from './tab-carousel.vue'
 
-export {
+export default {
   Carousel,
   TabCarousel
 };
