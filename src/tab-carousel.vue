@@ -81,6 +81,7 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     pointer-events: none;
+    flex: 0 0 auto;
   }
 
   .with-animation {
