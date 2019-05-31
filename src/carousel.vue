@@ -13,7 +13,23 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  props:['length', 'startPage','onCarouselMove', 'onPageUpdate'],
+  props:{
+    length: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+    startPage: {
+      type: Number,
+      default: 0
+    },
+    onCarouselMove: {
+      type: Function,
+    },
+    onPageUpdate: {
+      type: Function
+    }
+  },
   data: function () {
     return {
       page: this.startPage || 0, //表示中のページ0始まり
