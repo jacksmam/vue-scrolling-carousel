@@ -5,12 +5,14 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 // 複数エントリーポイント: http://okamuuu.hatenablog.com/entry/2016/11/24/135416
 module.exports = {
   entry: {
-    "dist/vue-scrolling-tab": "./src/index.ts",
-    "sample/output/sample": './sample/main.ts'
+    "dist/vue-scrolling-carousel": "./src/index.ts",
   },
   output: {
     path: path.resolve(__dirname),
     filename: '[name].js'
+  },
+  externals: {
+    'vue': 'Vue'
   },
   module: {
     rules: [
@@ -48,5 +50,4 @@ module.exports = {
   performance: {
     hints: false
   },
-  watch: true
 }
